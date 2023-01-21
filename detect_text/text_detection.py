@@ -3,8 +3,8 @@ import os
 import time
 from os.path import join as pjoin
 import cv2
-import UIED.detect_text.ocr as ocr
 import numpy as np
+import UIED.detect_text.ocr as ocr
 from UIED.detect_text.Text import Text
 
 
@@ -188,7 +188,7 @@ def text_detection(
         texts = merge_intersected_texts(texts)
         texts = text_filter_noise(texts)
         texts = text_sentences_recognition(texts)
-        print(texts)
+
     elif method == "paddle":
         # The import of the paddle ocr can be separate to the beginning of the program if you decide to use this method
         from paddleocr import PaddleOCR
