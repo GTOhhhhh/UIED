@@ -1,10 +1,12 @@
-import cv2
-import os
-import requests
 import json
-from base64 import b64encode
+import os
 import time
+from base64 import b64encode
+import cv2
+import requests
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def Google_OCR_makeImageData(imgpath):
     with open(imgpath, 'rb') as f:
@@ -25,7 +27,8 @@ def Google_OCR_makeImageData(imgpath):
 def ocr_detection_google(imgpath):
     start = time.clock()
     url = 'https://vision.googleapis.com/v1/images:annotate'
-    api_key = 'AIzaSyDUc4iOUASJQYkVwSomIArTKhE2C6bHK8U'             # *** Replace with your own Key ***
+    api_key = os.getenv('GOOGLE_API_KEY')
+
     imgdata = Google_OCR_makeImageData(imgpath)
     response = requests.post(url,
                              data=imgdata,
