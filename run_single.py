@@ -44,7 +44,8 @@ def color_tips():
 
 
 def run_single(
-    output_root="./UIED/data/output", input_path_img="./UIED/data/input/ignition1.PNG"
+    output_root="./src/UIED/data/output",
+    input_path_img="./src/UIED/data/input/screen.jpg",
 ):
     """
     ele:min-grad: gradient threshold to produce binary map
