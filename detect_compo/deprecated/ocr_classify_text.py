@@ -1,8 +1,7 @@
-import pytesseract as pyt
 import cv2
-
 import lib_ip.ip_draw as draw
-from config.CONFIG_UIED import Config
+import pytesseract as pyt
+from UIED.config.CONFIG_UIED import Config
 
 C = Config()
 
@@ -14,43 +13,49 @@ def is_text(img, min_word_area, show=False):
 
     try:
         # ocr text detection
-        data = pyt.image_to_data(img).split('\n')
+        data = pyt.image_to_data(img).split("\n")
     except:
         print(img.shape)
         return -1
     word = []
     for d in data[1:]:
         d = d.split()
-        if d[-1] != '-1':
-            if d[-1] != '-' and d[-1] != '—' and int(d[-3]) < 50 and int(d[-4]) < 100:
+        if d[-1] != "-1":
+            if d[-1] != "-" and d[-1] != "—" and int(d[-3]) < 50 and int(d[-4]) < 100:
                 word.append(d)
                 t_l = (int(d[-6]), int(d[-5]))
                 b_r = (int(d[-6]) + int(d[-4]), int(d[-5]) + int(d[-3]))
                 area_word += int(d[-4]) * int(d[-3])
-                cv2.rectangle(broad, t_l, b_r, (0,0,255), 1)
+                cv2.rectangle(broad, t_l, b_r, (0, 0, 255), 1)
 
     if show:
-        for d in word: print(d)
-        print(area_word/area_total)
-        cv2.imshow('a', broad)
+        for d in word:
+            print(d)
+        print(area_word / area_total)
+        cv2.imshow("a", broad)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
     # no text in this clip or relatively small text area
-    if len(word) == 0 or area_word/area_total < min_word_area:
+    if len(word) == 0 or area_word / area_total < min_word_area:
         return False
     return True
 
 
 def text_detection(org, img_clean):
     try:
-        data = pyt.image_to_data(img_clean).split('\n')
+        data = pyt.image_to_data(img_clean).split("\n")
     except:
         return org, None
     corners_word = []
     for d in data[1:]:
         d = d.split()
-        if d[-1] != '-1':
-            if d[-1] != '-' and d[-1] != '—' and 5 < int(d[-3]) < 40 and 5 < int(d[-4]) < 100:
+        if d[-1] != "-1":
+            if (
+                d[-1] != "-"
+                and d[-1] != "—"
+                and 5 < int(d[-3]) < 40
+                and 5 < int(d[-4]) < 100
+            ):
                 t_l = (int(d[-6]), int(d[-5]))
                 b_r = (int(d[-6]) + int(d[-4]), int(d[-5]) + int(d[-3]))
                 corners_word.append((t_l, b_r))
@@ -110,4 +115,3 @@ def text_detection(org, img_clean):
 #     for l in lines:
 #         corners_line.append(((l['col_min'], l['row_min']), (l['col_max'], l['row_max'])))
 #     return corners_line
-

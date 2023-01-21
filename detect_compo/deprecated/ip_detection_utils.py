@@ -1,9 +1,9 @@
-import numpy as np
-import cv2
 from collections import Counter
-
+import cv2
 import lib_ip.ip_draw as draw
-from config.CONFIG_UIED import Config
+import numpy as np
+from UIED.config.CONFIG_UIED import Config
+
 C = Config()
 
 
@@ -162,7 +162,7 @@ def clipping_by_line(boundary, boundary_rec, lines):
     boundary = boundary.copy()
     for orient in lines:
         # horizontal
-        if orient == 'h':
+        if orient == "h":
             # column range of sub area
             r1, r2 = 0, 0
             for line in lines[orient]:

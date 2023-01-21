@@ -3,9 +3,9 @@ import os
 import time
 from os.path import join as pjoin
 import cv2
-import detect_text.ocr as ocr
+import UIED.detect_text.ocr as ocr
 import numpy as np
-from detect_text.Text import Text
+from UIED.detect_text.Text import Text
 
 
 def save_detection_json(file_path, texts, img_shape):
@@ -208,12 +208,8 @@ def text_detection(
         show=show,
         write_path=pjoin(ocr_root, name + ".png"),
     )
-    print(texts)
     save_detection_json(pjoin(ocr_root, name + ".json"), texts, img.shape)
     # print(
     #     "[Text Detection Completed in %.3f s] Input: %s Output: %s"
     #     % (time.clock() - start, input_file, pjoin(ocr_root, name + ".json"))
     # )
-
-
-# text_detection()
