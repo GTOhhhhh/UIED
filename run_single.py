@@ -73,8 +73,8 @@ if __name__ == "__main__":
     }
 
     # set input image path
-    input_path_img = "./Capture.PNG"
-    output_root = "./output"
+    input_path_img = 'data/input/ignition1.PNG'
+    output_root = 'data/output'
 
     resized_height = resize_height_by_longest_edge(input_path_img, resize_length=800)
     color_tips()

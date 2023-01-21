@@ -2,11 +2,9 @@ import json
 import os
 import time
 from os.path import join as pjoin
-
 import cv2
-import numpy as np
-
 import detect_text.ocr as ocr
+import numpy as np
 from detect_text.Text import Text
 
 
@@ -178,7 +176,7 @@ def text_detection(
     :param method: google or paddle
     :param paddle_model: the preload paddle model for paddle ocr
     """
-    start = time.clock()
+    # start = time.clock()
     name = input_file.split("/")[-1][:-4]
     ocr_root = pjoin(output_file, "ocr")
     img = cv2.imread(input_file)
@@ -212,10 +210,10 @@ def text_detection(
     )
     print(texts)
     save_detection_json(pjoin(ocr_root, name + ".json"), texts, img.shape)
-    print(
-        "[Text Detection Completed in %.3f s] Input: %s Output: %s"
-        % (time.clock() - start, input_file, pjoin(ocr_root, name + ".json"))
-    )
+    # print(
+    #     "[Text Detection Completed in %.3f s] Input: %s Output: %s"
+    #     % (time.clock() - start, input_file, pjoin(ocr_root, name + ".json"))
+    # )
 
 
 # text_detection()

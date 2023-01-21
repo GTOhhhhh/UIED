@@ -18,6 +18,7 @@ def Google_OCR_makeImageData(imgpath):
             'features': [{
                 'type': 'DOCUMENT_TEXT_DETECTION',
                 # 'type': 'TEXT_DETECTION',
+                # @TODO Play around with this
                 'maxResults': 1
             }]
         }
@@ -25,7 +26,7 @@ def Google_OCR_makeImageData(imgpath):
 
 
 def ocr_detection_google(imgpath):
-    start = time.clock()
+    # start = time.clock()
     url = 'https://vision.googleapis.com/v1/images:annotate'
     api_key = os.getenv('GOOGLE_API_KEY')
 
